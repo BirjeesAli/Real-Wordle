@@ -66,7 +66,8 @@ function sleep(ms) {
 
 // Cell transition
 function transit(cell, color){
-    cell.style.setProperty('background-color', `var(${color})`)
+    cell.style.borderColor = (`var(${color})`);
+    cell.style.setProperty('background-color', `var(${color})`);
     cell.classList.add('animate__flipInX');
     cell.style.setProperty('--animate-duration', '1.5s');
 }
@@ -86,36 +87,36 @@ function removeChar(word, char){
 }
 
 async function getWord(row){
+    let word = '';
+    let out = ['','', '', '', ''];
+
     if (!IsComplete()){
         alert("Please complete the word!")
         return
     }
 
-    let word = '';
     for (idx = 0; idx < row.childElementCount; idx++){
         let cell = row.children[idx];
         word += cell.textContent;
     }
-    currentRow += 1;
-
+    
     if (word == ToGuess) { 
         stopGame = true;
-        alert("Hohhoooo!!!! Right Answer!!!");
+        out = ['--color-correct', '--color-correct', '--color-correct', '--color-correct', '--color-correct'];
     }
-
-    let out = ['','', '', '', ''];
-
-    for (let pos in ToGuess.toUpperCase()){
- 
-        if (ToGuess[pos] == word[pos]){
-            out[pos] = '--color-correct';
-        }
-        else if(word.includes(ToGuess[pos])){  
-            out[word.indexOf(ToGuess[pos])] = '--color-present';
-            word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
+    else{
+        for (let pos in ToGuess.toUpperCase()){
+            if (ToGuess[pos] == word[pos]){
+                out[pos] = '--color-correct';
+            }
+            else if(word.includes(ToGuess[pos])){  
+                out[word.indexOf(ToGuess[pos])] = '--color-present';
+                word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
+            }
         }
     }
 
+    
     for (ch in out){
         let cell = row.children[ch];
         if (out[ch] == '') transit(cell, '--color-absent'); 
@@ -123,8 +124,14 @@ async function getWord(row){
         await sleep(300);
     }
 
+    if (stopGame) alert("Right Answer!!!");
+
+    currentRow += 1;
+
     if (currentRow > 5){
         alert("Better luck next time!");
         stopGame = true;
+        return
     }
+
 }
