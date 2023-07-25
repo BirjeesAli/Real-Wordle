@@ -1,0 +1,48 @@
+:root {
+  --gap: 5px;
+  --color-correct: #538d4e;
+  --color-absent: #3a3a3c;
+  --color-present: #b59f3b;
+}
+
+.container {
+  width: 100%;
+  height: 98vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  background-color: #121213;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--gap);
+}
+
+.row {
+  display: flex;
+  column-gap: var(--gap);
+}
+
+.cell {
+  background-color: #121213;
+  color: #ffff;
+  border: 2px solid #3a3a3c;
+  --size: 62px;
+  width: var(--size);
+  height: var(--size);
+  animation-duration: 2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell > p {
+  font-weight: 500;
+  font-size: 32px;
+}
