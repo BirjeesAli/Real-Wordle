@@ -124,7 +124,10 @@ async function getWord(row){
         await sleep(300);
     }
 
-    if (stopGame) alert("Right Answer!!!");
+    if (stopGame) {
+        alert("Right Answer!!!")
+        return
+    };
 
     currentRow += 1;
 
