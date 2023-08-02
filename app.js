@@ -109,18 +109,18 @@ async function getWord(row){
             if (ToGuess[pos] == word[pos]){
                 out[pos] = '--color-correct';
                 word = removeChar(word, word[pos]);
-                console.log('info:', ToGuess[pos], word.indexOf(ToGuess[pos]), word[word.indexOf(ToGuess[pos])]);
-                console.log(word[pos], 'green found at:', pos, out);
+                // console.log('info:', word, ToGuess[pos], word.indexOf(ToGuess[pos]), word[word.indexOf(ToGuess[pos])]);
+                // console.log(word[pos], 'green found at:', pos, out);
             }
             else if(word.includes(ToGuess[pos])){ 
                 out[word.indexOf(ToGuess[pos])] = '--color-present';
                 word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
-                console.log(word[pos], 'yellow found at:', pos, out); 
+                // console.log(ToGuess[pos], 'yellow found at:', word.indexOf(ToGuess[pos]), out); 
             }
-            else out[pos] = '--color-absent';
-            console.log(pos, 'word:', word);
+            // else out[pos] = '--color-absent';
+            // console.log(pos, 'word:', word);
         }
-        console.log('last:',out);
+        // console.log('last:',out);
     }
 
     
