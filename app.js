@@ -4,6 +4,20 @@ let currentRow = 0;
 let currentCol = 0;
 let ToGuess = 'CREED';
 let stopGame = false;
+let loading = 0;
+
+function handleloader(){
+    let choices = ['none', 'flex'];
+    document.getElementsByClassName('board')[0].style.display = choices[+loading];
+    document.getElementById('loader').style.display = choices[+(!loading)];
+    loading = +(!(loading));
+}
+
+async function init() {
+    handleloader();
+    await sleep(1000);
+    handleloader();
+}
 
 // Keyboard Bindings
 window.addEventListener('keyup', function(event) {
@@ -94,12 +108,10 @@ async function getWord(row){
         alert("Please complete the word!");
         return;
     }
-
     for (idx = 0; idx < row.childElementCount; idx++){
         let cell = row.children[idx];
         word += cell.textContent;
     }
-    
     if (word == ToGuess) { 
         stopGame = true;
         out = ['--color-correct', '--color-correct', '--color-correct', '--color-correct', '--color-correct'];
@@ -109,18 +121,12 @@ async function getWord(row){
             if (ToGuess[pos] == word[pos]){
                 out[pos] = '--color-correct';
                 word = removeChar(word, word[pos]);
-                // console.log('info:', word, ToGuess[pos], word.indexOf(ToGuess[pos]), word[word.indexOf(ToGuess[pos])]);
-                // console.log(word[pos], 'green found at:', pos, out);
             }
             else if(word.includes(ToGuess[pos])){ 
                 out[word.indexOf(ToGuess[pos])] = '--color-present';
                 word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
-                // console.log(ToGuess[pos], 'yellow found at:', word.indexOf(ToGuess[pos]), out); 
             }
-            // else out[pos] = '--color-absent';
-            // console.log(pos, 'word:', word);
         }
-        // console.log('last:',out);
     }
 
     
@@ -145,3 +151,5 @@ async function getWord(row){
     }
 
 }
+
+init();
