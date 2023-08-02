@@ -109,7 +109,7 @@ async function getWord(row){
             if (ToGuess[pos] == word[pos]){
                 out[pos] = '--color-correct';
                 console.log(word[pos], 'green found at:', pos, out);
-                // word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
+                word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
             }
             else if(word.includes(ToGuess[pos])){ 
                 out[word.indexOf(ToGuess[pos])] = '--color-present';
