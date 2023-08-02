@@ -91,8 +91,8 @@ async function getWord(row){
     let out = ['','', '', '', ''];
 
     if (!IsComplete()){
-        alert("Please complete the word!")
-        return
+        alert("Please complete the word!");
+        return;
     }
 
     for (idx = 0; idx < row.childElementCount; idx++){
@@ -108,6 +108,7 @@ async function getWord(row){
         for (let pos in ToGuess.toUpperCase()){
             if (ToGuess[pos] == word[pos]){
                 out[pos] = '--color-correct';
+                word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
             }
             else if(word.includes(ToGuess[pos])){  
                 out[word.indexOf(ToGuess[pos])] = '--color-present';
@@ -132,8 +133,8 @@ async function getWord(row){
     currentRow += 1;
 
     if (currentRow > 5){
-        alert("Better luck next time! The word was:", ToGuess.toString());
-        console.log("Better luck next time! The word was:", ToGuess);
+        alert("Better luck next time! The word was: "+ToGuess);
+        // console.log("Better luck next time! The word was:", ToGuess);
         stopGame = true;
         return
     }
