@@ -105,16 +105,16 @@ async function getWord(row){
         out = ['--color-correct', '--color-correct', '--color-correct', '--color-correct', '--color-correct'];
     }
     else{
-        for (let pos in ToGuess.toUpperCase()){
+        for (let pos in ToGuess){
             if (ToGuess[pos] == word[pos]){
-                console.log(word[pos], 'green found at:', pos);
                 out[pos] = '--color-correct';
+                console.log(word[pos], 'green found at:', pos, out);
                 // word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
             }
             else if(word.includes(ToGuess[pos])){ 
-                console.log(word[pos], 'yellow found at:', pos); 
                 out[word.indexOf(ToGuess[pos])] = '--color-present';
                 word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
+                console.log(word[pos], 'yellow found at:', pos, out); 
             }
             console.log(pos, 'word:', word);
         }
