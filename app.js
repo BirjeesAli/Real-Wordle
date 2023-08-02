@@ -108,8 +108,8 @@ async function getWord(row){
         for (let pos in ToGuess){
             if (ToGuess[pos] == word[pos]){
                 out[pos] = '--color-correct';
-                console.log(word[pos], 'green found at:', pos, out);
                 word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
+                console.log(word[pos], 'green found at:', pos, out);
             }
             else if(word.includes(ToGuess[pos])){ 
                 out[word.indexOf(ToGuess[pos])] = '--color-present';
