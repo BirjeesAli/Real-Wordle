@@ -132,7 +132,8 @@ async function getWord(row){
     currentRow += 1;
 
     if (currentRow > 5){
-        alert("Better luck next time! The word was:", ToGuess);
+        alert("Better luck next time! The word was:", );
+        console.log("Better luck next time! The word was:", );
         stopGame = true;
         return
     }
