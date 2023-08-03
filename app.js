@@ -96,8 +96,9 @@ function IsComplete(){
     }
 }
 
-function removeChar(word, char){
-    return (word.slice(0, word.indexOf(char)))+'*'+(word.slice(word.indexOf(char)+1, word.length))
+function removeChar(word, char, pos=-1){
+    if (pos == -1) return (word.slice(0, word.indexOf(char)))+'*'+(word.slice(word.indexOf(char)+1, word.length))
+    return (word.slice(0, pos)+'*'+(word.slice(pos+1, word.length)));
 }
 
 async function getWord(row){
@@ -120,11 +121,11 @@ async function getWord(row){
         for (let pos in ToGuess){
             if (ToGuess[pos] == word[pos]){
                 out[pos] = '--color-correct';
-                word = removeChar(word, word[pos]);
+                word = removeChar(word, "*", +pos);
             }
             else if(word.includes(ToGuess[pos])){ 
                 out[word.indexOf(ToGuess[pos])] = '--color-present';
-                word = removeChar(word, word[word.indexOf(ToGuess[pos])]);
+                word = removeChar(word, word[word.indexOf(ToGuess[pos])]);                
             }
         }
     }
